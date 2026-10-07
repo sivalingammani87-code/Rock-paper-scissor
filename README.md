@@ -1,8 +1,8 @@
 # Wayfarer — Smart Travel Planner
 
-A responsive travel-planning website with English, Spanish, and French interface options. Enter a destination, dates, and preferences to create a sample itinerary, or choose a destination from the inspiration cards.
+A responsive travel-planning website with English, Spanish, French, and Hindi interface options. Search for and select a destination on an OpenStreetMap preview, enter travel dates and preferences, then create a sample itinerary or choose from the inspiration cards.
 
-Itinerary suggestions are generated locally in the browser; this project does not connect to a live AI service or travel-booking API.
+Itinerary suggestions are generated locally in the browser; this project does not connect to a live AI service or travel-booking API. Destination searches are sent to OpenStreetMap's Nominatim service to look up places and display the map.
 
 ## Run locally
 

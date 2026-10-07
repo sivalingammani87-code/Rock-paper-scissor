@@ -46,6 +46,24 @@
 .field input::placeholder { color: #aaa99f; }
 .field input[type="date"] { min-height: 25px; }
 .field select { cursor: pointer; }
+.destination-field { gap: 10px; }
+.location-search-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.location-search-row p { margin: 0; color: #898b82; font-size: 9px; line-height: 1.5; }
+.location-search-button { flex: 0 0 auto; padding: 8px 11px; border: 1px solid var(--line); background: #f8f8f3; color: var(--green); cursor: pointer; font-size: 9px; font-weight: 600; }
+.location-search-button:hover:not(:disabled) { background: #edf1e9; }
+.location-search-button:disabled { cursor: wait; opacity: .65; }
+.location-search-button span { margin-right: 4px; color: #a07452; }
+.location-error { margin: 0; color: #9d493f; font-size: 10px; }
+.location-results { display: grid; border: 1px solid var(--line); }
+.location-result { display: flex; align-items: baseline; gap: 8px; padding: 10px 11px; border: 0; border-bottom: 1px solid var(--line); background: #fff; color: var(--ink); cursor: pointer; text-align: left; font-size: 10px; line-height: 1.5; }
+.location-result:last-child { border-bottom: 0; }
+.location-result:hover { background: #f5f6ef; }
+.location-result > span { flex: 0 0 auto; color: #a07452; }
+.location-map { overflow: hidden; border: 1px solid var(--line); }
+.location-map iframe { display: block; width: 100%; height: 260px; border: 0; }
+.map-caption { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 10px; color: #777c73; font-size: 8px; }
+.map-caption a { color: var(--green); text-decoration: none; white-space: nowrap; }
+.map-caption a:hover { text-decoration: underline; }
 .form-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 16px 0; border-bottom: 1px solid var(--line); }
 .preferences-row { grid-template-columns: 1fr 1fr auto; align-items: center; border: 0; padding-bottom: 3px; }
 .plan-button { display: flex; align-items: center; justify-content: space-between; gap: 22px; min-width: 174px; margin-left: 15px; padding: 15px 17px; border: 0; background: var(--green); color: #fff; cursor: pointer; font-size: 10px; font-weight: 600; transition: background .2s ease; }

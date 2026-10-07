@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import './App.css';
 
 const copy = {
@@ -18,6 +18,17 @@ const copy = {
     plannerIntro: 'A few details are all we need to get you on your way.',
     destinationLabel: 'I want to go to',
     destinationPlaceholder: 'A place, a feeling, anywhere...',
+    findOnMap: 'Find on map',
+    searchingLocations: 'Searching…',
+    locationHint: 'Search a city, landmark, or country to choose it on the map.',
+    locationQueryRequired: 'Enter at least two characters to search for a place.',
+    locationSearchUnavailable: 'Location search is unavailable right now. Check your connection and try again.',
+    locationSearchWait: 'Please wait a moment before searching again.',
+    locationNotFound: 'No places found. Try a different city or country.',
+    chooseLocation: 'Choose location',
+    locationMapLabel: (place) => `Map showing ${place}`,
+    openMap: 'Open map',
+    mapAttribution: 'Map data © OpenStreetMap contributors',
     leaving: 'Leaving',
     returning: 'Coming back',
     crew: 'The crew',
@@ -68,6 +79,17 @@ const copy = {
     plannerIntro: 'Con unos pocos detalles, ya podemos ponerte en camino.',
     destinationLabel: 'Quiero ir a',
     destinationPlaceholder: 'Un lugar, una sensación, donde sea...',
+    findOnMap: 'Buscar en el mapa',
+    searchingLocations: 'Buscando…',
+    locationHint: 'Busca una ciudad, un lugar o un país para elegirlo en el mapa.',
+    locationQueryRequired: 'Escribe al menos dos caracteres para buscar un lugar.',
+    locationSearchUnavailable: 'La búsqueda de lugares no está disponible. Comprueba tu conexión e inténtalo de nuevo.',
+    locationSearchWait: 'Espera un momento antes de volver a buscar.',
+    locationNotFound: 'No encontramos lugares. Prueba con otra ciudad o país.',
+    chooseLocation: 'Elegir lugar',
+    locationMapLabel: (place) => `Mapa de ${place}`,
+    openMap: 'Abrir mapa',
+    mapAttribution: 'Datos del mapa © colaboradores de OpenStreetMap',
     leaving: 'Salida',
     returning: 'Regreso',
     crew: 'Viajeros',
@@ -118,6 +140,17 @@ const copy = {
     plannerIntro: 'Quelques détails suffisent pour vous mettre en route.',
     destinationLabel: 'Je veux aller à',
     destinationPlaceholder: 'Un lieu, une envie, peu importe...',
+    findOnMap: 'Chercher sur la carte',
+    searchingLocations: 'Recherche…',
+    locationHint: 'Cherchez une ville, un lieu ou un pays pour le choisir sur la carte.',
+    locationQueryRequired: 'Saisissez au moins deux caractères pour rechercher un lieu.',
+    locationSearchUnavailable: 'La recherche de lieux est momentanément indisponible. Vérifiez votre connexion et réessayez.',
+    locationSearchWait: 'Patientez un instant avant de relancer la recherche.',
+    locationNotFound: 'Aucun lieu trouvé. Essayez une autre ville ou un autre pays.',
+    chooseLocation: 'Choisir ce lieu',
+    locationMapLabel: (place) => `Carte de ${place}`,
+    openMap: 'Ouvrir la carte',
+    mapAttribution: 'Données cartographiques © contributeurs OpenStreetMap',
     leaving: 'Départ',
     returning: 'Retour',
     crew: 'Voyageurs',
@@ -152,6 +185,67 @@ const copy = {
     dateLocale: 'fr',
     aria: { home: 'Accueil Wayfarer', destination: 'Destination', departure: 'Date de départ', return: 'Date de retour', travelers: 'Nombre de voyageurs', interests: 'Envies de voyage', budget: 'Budget' },
   },
+  hi: {
+    language: 'भाषा',
+    navLabel: 'मुख्य नेविगेशन',
+    nav: ['यात्रा की योजना', 'प्रेरणा', 'यह कैसे काम करता है'],
+    startPlanning: 'योजना शुरू करें',
+    eyebrow: 'थोड़ा और आप, देखने के लिए बहुत कुछ',
+    heroTitle: <>कम योजना।<br />ज़्यादा <em>सफ़र।</em></>,
+    heroDescription: 'आपकी अगली पसंदीदा जगह सोच से भी क़रीब है। चलिए, आपकी पसंद की यात्रा बनाते हैं।',
+    heroCta: 'अपनी अगली जगह खोजें',
+    heroNote: <>अच्छी यात्राएँ शुरू होती हैं<br />थोड़ी जिज्ञासा से।</>,
+    heroCaption: 'धीमा-सा इतवार, पोसितानो',
+    plannerKicker: 'आपका अगला सफ़र',
+    plannerTitle: <>कहाँ <em>चलें?</em></>,
+    plannerIntro: 'आपको सफ़र पर भेजने के लिए बस कुछ जानकारियाँ चाहिए।',
+    destinationLabel: 'मैं यहाँ जाना चाहता/चाहती हूँ',
+    destinationPlaceholder: 'कोई जगह, कोई एहसास, कहीं भी...',
+    findOnMap: 'नक्शे पर खोजें',
+    searchingLocations: 'खोज रहे हैं…',
+    locationHint: 'नक्शे पर जगह चुनने के लिए शहर, स्थल या देश खोजें।',
+    locationQueryRequired: 'जगह खोजने के लिए कम से कम दो अक्षर लिखें।',
+    locationSearchUnavailable: 'अभी जगह की खोज उपलब्ध नहीं है। कनेक्शन जाँचकर फिर कोशिश करें।',
+    locationSearchWait: 'दोबारा खोजने से पहले एक पल रुकें।',
+    locationNotFound: 'कोई जगह नहीं मिली। कोई दूसरा शहर या देश खोजें।',
+    chooseLocation: 'यह जगह चुनें',
+    locationMapLabel: (place) => `${place} का नक्शा`,
+    openMap: 'नक्शा खोलें',
+    mapAttribution: 'नक्शे का डेटा © OpenStreetMap योगदानकर्ता',
+    leaving: 'रवाना',
+    returning: 'वापसी',
+    crew: 'यात्री',
+    interests: 'आपकी पसंद की यात्रा',
+    budget: 'खर्च का अंदाज़',
+    experiences: ['संस्कृति और इतिहास', 'खाना और स्थानीय स्वाद', 'प्रकृति और बाहर', 'आराम और सुकून'],
+    travelers: ['अकेले यात्री', '2 यात्री', '3 यात्री', '4 या अधिक यात्री'],
+    budgets: ['किफ़ायती', 'आरामदायक', 'थोड़ा ख़ास'],
+    plan: 'मेरी योजना बनाएँ',
+    footnote: 'आपके लिए ख़ास सुझाव। किसी स्प्रेडशीट की ज़रूरत नहीं।',
+    itineraryKicker: 'आपकी छोटी-सी छुट्टी',
+    tripTo: 'यात्रा',
+    tripPace: 'आपकी यात्रा, आपकी रफ़्तार',
+    day: 'दिन',
+    dayTitles: ['जगह को जानें', 'अपनी रफ़्तार पाएँ', 'कुछ नया खोजें', 'स्थानीय अंदाज़ में दिन', 'एक आख़िरी सैर'],
+    arrival: (destination) => `${destination} पहुँचें और आराम से ठहरें`,
+    activities: [
+      ['पुराने मोहल्ले में घूमें', 'स्थानीय संग्रहालय या कला दीर्घा देखें', 'छोटी-सी लाइव प्रस्तुति का आनंद लें'],
+      ['मोहल्ले के कैफ़े से दिन शुरू करें', 'स्थानीय बाज़ार के स्वाद चखें', 'छिपा हुआ पसंदीदा रेस्टोरेंट खोजें'],
+      ['नज़ारे तक जाने वाला सुंदर रास्ता चुनें', 'प्रकृति की पगडंडी पर दोपहर बिताएँ', 'हरियाली में सुनहरी शाम देखें'],
+      ['पास के कैफ़े में आराम से सुबह बिताएँ', 'स्पा या सैर के लिए दोपहर खाली रखें', 'शाम के लिए कोई शांत जगह खोजें'],
+    ],
+    itineraryNote: 'एक बढ़िया शुरुआत, जिसमें आपके अपने रास्तों के लिए भी जगह है।',
+    inspirationKicker: 'कुछ जगहें जिनके सपने देख सकते हैं',
+    inspirationTitle: <>कोई <em>ख़ूबसूरत जगह।</em></>,
+    handwritten: 'दुनिया खुली है',
+    categories: ['शहर की रौनक', 'शांत जादू', 'स्थानीय स्वाद'],
+    closingTitle: <>सिर्फ़ यात्रा नहीं। <em>कुछ और आप।</em></>,
+    closingSubtitle: 'सोच-समझकर की गई यात्रा यहीं से शुरू होती है।',
+    footerTagline: 'वहाँ जाएँ जहाँ आप ख़ुद जैसे महसूस करें।',
+    backToTop: 'ऊपर जाएँ',
+    dateLocale: 'hi-IN',
+    aria: { home: 'Wayfarer का होम', destination: 'गंतव्य', departure: 'रवाना होने की तारीख़', return: 'वापसी की तारीख़', travelers: 'यात्रियों की संख्या', interests: 'यात्रा की पसंद', budget: 'बजट' },
+  },
 };
 
 const destinations = [
@@ -168,6 +262,21 @@ function followingDate(dateString) {
   const date = new Date(`${dateString}T12:00:00`);
   date.setDate(date.getDate() + 1);
   return date.toISOString().slice(0, 10);
+}
+
+function createMapUrl(location) {
+  const latitude = Number(location.lat);
+  const longitude = Number(location.lon);
+  const bounds = Array.isArray(location.boundingbox) ? location.boundingbox.map(Number) : [];
+  const [south, north, west, east] = bounds.length === 4
+    ? bounds
+    : [latitude - 0.02, latitude + 0.02, longitude - 0.02, longitude + 0.02];
+  const params = new URLSearchParams({
+    bbox: [west, south, east, north].join(','),
+    layer: 'mapnik',
+    marker: `${latitude},${longitude}`,
+  });
+  return `https://www.openstreetmap.org/export/embed.html?${params.toString()}`;
 }
 
 function createItinerary(destination, startDate, endDate, experience, language) {
@@ -199,14 +308,71 @@ function createItinerary(destination, startDate, endDate, experience, language) 
 function App() {
   const [language, setLanguage] = useState('en');
   const [destination, setDestination] = useState('');
+  const [locationResults, setLocationResults] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [locationLoading, setLocationLoading] = useState(false);
+  const [locationError, setLocationError] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [travelers, setTravelers] = useState(1);
   const [budget, setBudget] = useState(1);
   const [experience, setExperience] = useState('culture');
   const [itinerary, setItinerary] = useState(null);
+  const lastLocationSearch = useRef(0);
   const text = copy[language];
   const today = new Date().toISOString().slice(0, 10);
+
+  async function handleLocationSearch() {
+    const query = destination.trim();
+    if (query.length < 2) {
+      setLocationError(text.locationQueryRequired);
+      return;
+    }
+
+    if (Date.now() - lastLocationSearch.current < 1000) {
+      setLocationError(text.locationSearchWait);
+      return;
+    }
+
+    lastLocationSearch.current = Date.now();
+    setLocationLoading(true);
+    setLocationError('');
+    setLocationResults([]);
+    setSelectedLocation(null);
+
+    const params = new URLSearchParams({
+      q: query,
+      format: 'jsonv2',
+      limit: '5',
+      addressdetails: '1',
+      'accept-language': language,
+    });
+
+    try {
+      const response = await fetch(`https://nominatim.openstreetmap.org/search?${params.toString()}`, {
+        headers: { Accept: 'application/json' },
+      });
+      if (!response.ok) {
+        throw new Error(`Location lookup failed with status ${response.status}`);
+      }
+
+      const results = await response.json();
+      if (!Array.isArray(results)) {
+        throw new Error('Location lookup returned an unexpected response');
+      }
+
+      if (results.length === 0) {
+        setLocationError(text.locationNotFound);
+      } else {
+        setLocationResults(results);
+      }
+    } catch (error) {
+      console.error('Unable to search OpenStreetMap locations:', error);
+      setLocationError(text.locationSearchUnavailable);
+    } finally {
+      setLocationLoading(false);
+    }
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -240,6 +406,7 @@ function App() {
               <option value="en">EN</option>
               <option value="es">ES</option>
               <option value="fr">FR</option>
+              <option value="hi">हिं</option>
             </select>
           </label>
           <a className="header-link" href="#planner">{text.startPlanning} <span aria-hidden="true">↗</span></a>
@@ -271,18 +438,67 @@ function App() {
           </div>
 
           <form className="planner-form" onSubmit={handleSubmit}>
-            <label className="field destination-field">
-              <span className="field-label"><span aria-hidden="true">⌖</span> {text.destinationLabel}</span>
+            <div className="field destination-field">
+              <label className="field-label" htmlFor="destination-input"><span aria-hidden="true">⌖</span> {text.destinationLabel}</label>
               <input
+                id="destination-input"
                 type="text"
                 placeholder={text.destinationPlaceholder}
                 value={destination}
-                onChange={(event) => setDestination(event.target.value)}
+                onChange={(event) => {
+                  setDestination(event.target.value);
+                  setSelectedLocation(null);
+                  setLocationResults([]);
+                  setLocationError('');
+                }}
                 required
                 minLength={2}
                 aria-label={text.aria.destination}
               />
-            </label>
+              <div className="location-search-row">
+                <p>{text.locationHint}</p>
+                <button className="location-search-button" type="button" onClick={handleLocationSearch} disabled={locationLoading}>
+                  <span aria-hidden="true">⌖</span> {locationLoading ? text.searchingLocations : text.findOnMap}
+                </button>
+              </div>
+              {locationError && <p className="location-error" role="alert">{locationError}</p>}
+              {locationResults.length > 0 && (
+                <div className="location-results" aria-label={text.chooseLocation}>
+                  {locationResults.map((location) => (
+                    <button
+                      className="location-result"
+                      type="button"
+                      key={location.place_id}
+                      aria-label={`${text.chooseLocation}: ${location.display_name}`}
+                      onClick={() => {
+                        setSelectedLocation(location);
+                        setDestination(location.display_name);
+                        setLocationResults([]);
+                        setLocationError('');
+                      }}
+                    >
+                      <span aria-hidden="true">⌖</span>{location.display_name}
+                    </button>
+                  ))}
+                </div>
+              )}
+              {selectedLocation && (
+                <div className="location-map">
+                  <iframe
+                    title={text.locationMapLabel(selectedLocation.display_name)}
+                    src={createMapUrl(selectedLocation)}
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="map-caption">
+                    <span>{text.mapAttribution}</span>
+                    <a href={`https://www.openstreetmap.org/?mlat=${encodeURIComponent(selectedLocation.lat)}&mlon=${encodeURIComponent(selectedLocation.lon)}#map=13/${encodeURIComponent(selectedLocation.lat)}/${encodeURIComponent(selectedLocation.lon)}`} target="_blank" rel="noreferrer">
+                      {text.openMap} ↗
+                    </a>
+                  </div>
+                </div>
+              )}
+            </div>
             <div className="form-row">
               <label className="field">
                 <span className="field-label"><span aria-hidden="true">↗</span> {text.leaving}</span>
@@ -359,7 +575,11 @@ function App() {
           </div>
           <div className="destination-grid">
             {destinations.map((place, index) => (
-              <a className={`destination-card ${place.className}`} href="#planner" onClick={() => setDestination(place.value)} key={place.value}>
+              <a className={`destination-card ${place.className}`} href="#planner" onClick={() => {
+                setDestination(place.value);
+                setSelectedLocation(null);
+                setLocationResults([]);
+              }} key={place.value}>
                 <span className="destination-index">0{index + 1} / {text.categories[index]}</span><span className="destination-name">{place.name}</span><span className="destination-arrow" aria-hidden="true">↗</span>
               </a>
             ))}

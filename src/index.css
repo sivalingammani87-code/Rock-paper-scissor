@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap');
 
 :root {
   --ink: #243b32;
@@ -25,5 +25,13 @@ button, input, select { font: inherit; }
 button, a, input, select { -webkit-tap-highlight-color: transparent; }
 
 a { color: inherit; }
+
+.app-shell[lang="hi"] { font-family: 'Noto Sans Devanagari', 'DM Sans', sans-serif; }
+.app-shell[lang="hi"] .hero h1,
+.app-shell[lang="hi"] .section-heading h2,
+.app-shell[lang="hi"] .itinerary-header h2,
+.app-shell[lang="hi"] .inspiration-heading h2,
+.app-shell[lang="hi"] .day-card h3,
+.app-shell[lang="hi"] .closing-note p { font-family: 'Noto Sans Devanagari', 'Playfair Display', serif; }
 
 ::selection { background: #d4e0d1; color: var(--ink); }
