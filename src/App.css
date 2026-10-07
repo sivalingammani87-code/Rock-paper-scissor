@@ -64,6 +64,28 @@
 .map-caption { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 10px; color: #777c73; font-size: 8px; }
 .map-caption a { color: var(--green); text-decoration: none; white-space: nowrap; }
 .map-caption a:hover { text-decoration: underline; }
+.nearby-section { display: grid; gap: 10px; padding: 16px; border: 1px solid var(--line); border-top: 0; background: #fbfbf8; }
+.nearby-heading { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.nearby-heading h3 { margin: 0; font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 500; }
+.nearby-heading > div > p { margin: 5px 0 0; color: var(--muted); font-size: 9px; }
+.budget-guide { display: grid; justify-items: end; gap: 4px; text-align: right; }
+.budget-guide span, .nearby-fee > span { color: var(--muted); font-size: 8px; }
+.budget-guide strong { color: var(--green); font-size: 11px; }
+.budget-disclaimer, .nearby-attribution { margin: 0; color: #85877e; font-size: 8px; line-height: 1.5; }
+.nearby-status, .nearby-error { margin: 0; padding: 9px 0; color: var(--muted); font-size: 10px; }
+.nearby-error { color: #9d493f; }
+.nearby-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.nearby-list { min-width: 0; }
+.nearby-list h4 { margin: 5px 0 9px; color: var(--ink); font-size: 10px; }
+.nearby-card { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px 0; border-top: 1px solid var(--line); }
+.nearby-card > div { display: grid; min-width: 0; gap: 4px; }
+.nearby-place-name { overflow: hidden; color: var(--green); font-size: 10px; font-weight: 600; text-decoration: none; text-overflow: ellipsis; }
+.nearby-place-name:hover { text-decoration: underline; }
+.nearby-distance { color: var(--muted); font-size: 8px; }
+.nearby-action { flex: 0 0 auto; color: var(--green); font-size: 8px; text-decoration: none; }
+.nearby-action:hover { text-decoration: underline; }
+.nearby-fee { display: grid; flex: 0 0 auto; gap: 3px; color: var(--ink); font-size: 8px; text-align: right; }
+.nearby-attribution { padding-top: 2px; border-top: 1px solid var(--line); }
 .form-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 16px 0; border-bottom: 1px solid var(--line); }
 .preferences-row { grid-template-columns: 1fr 1fr auto; align-items: center; border: 0; padding-bottom: 3px; }
 .plan-button { display: flex; align-items: center; justify-content: space-between; gap: 22px; min-width: 174px; margin-left: 15px; padding: 15px 17px; border: 0; background: var(--green); color: #fff; cursor: pointer; font-size: 10px; font-weight: 600; transition: background .2s ease; }
@@ -140,6 +162,7 @@
   .destination-name { max-width: 130px; font-size: 18px; }
   .destination-index { font-size: 7px; }
   .destination-arrow { right: 11px; bottom: 11px; width: 22px; height: 22px; }
+  .nearby-grid { gap: 12px; }
 }
 
 @media (max-width: 500px) {
@@ -156,6 +179,10 @@
   .field, .form-row .field:nth-child(2) { padding: 0 2px 12px; border-right: 0; border-bottom: 1px solid var(--line); }
   .preferences-row .field:last-of-type { border-bottom: 0; }
   .preferences-row { gap: 15px; }
+  .nearby-section { padding: 13px; }
+  .nearby-heading { align-items: flex-start; flex-direction: column; }
+  .budget-guide { justify-items: start; text-align: left; }
+  .nearby-grid { grid-template-columns: 1fr; gap: 10px; }
   .itinerary-header { align-items: start; flex-direction: column; }
   .itinerary-header h2 { font-size: 27px; }
   .inspiration-heading { align-items: start; flex-direction: column; }

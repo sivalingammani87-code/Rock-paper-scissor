@@ -25,16 +25,35 @@ test('creates an itinerary and translates the planner and itinerary', () => {
 });
 
 test('finds and previews a selected destination on the map', async () => {
-  const fetchSpy = jest.spyOn(global, 'fetch').mockResolvedValue({
+  const fetchSpy = jest.spyOn(global, 'fetch').mockImplementation((url) => Promise.resolve({
     ok: true,
-    json: async () => [{
-      place_id: 1,
-      display_name: 'Lisbon, Portugal',
-      lat: '38.7078',
-      lon: '-9.1366',
-      boundingbox: ['38.6912', '38.7959', '-9.2298', '-9.0915'],
-    }],
-  });
+    json: async () => (url.includes('nominatim')
+      ? [{
+        place_id: 1,
+        display_name: 'Lisbon, Portugal',
+        lat: '38.7078',
+        lon: '-9.1366',
+        boundingbox: ['38.6912', '38.7959', '-9.2298', '-9.0915'],
+      }]
+      : {
+        elements: [
+          {
+            type: 'node',
+            id: 2,
+            lat: '38.7078',
+            lon: '-9.1266',
+            tags: { name: 'Riverside Hotel', tourism: 'hotel' },
+          },
+          {
+            type: 'node',
+            id: 3,
+            lat: '38.7178',
+            lon: '-9.1366',
+            tags: { name: 'Garden Museum', tourism: 'museum', charge: '$12' },
+          },
+        ],
+      }),
+  }));
   render(<App />);
 
   fireEvent.change(screen.getByLabelText('Destination'), { target: { value: 'Lisbon' } });
@@ -46,5 +65,11 @@ test('finds and previews a selected destination on the map', async () => {
   const map = await screen.findByTitle('Map showing Lisbon, Portugal');
   expect(map).toHaveAttribute('src', expect.stringContaining('marker=38.7078%2C-9.1366'));
   expect(screen.getByRole('link', { name: /open map/i })).toHaveAttribute('href', expect.stringContaining('openstreetmap.org'));
+  expect(await screen.findByRole('heading', { name: 'Around your destination' })).toBeInTheDocument();
+  expect(await screen.findByRole('link', { name: /riverside hotel/i })).toHaveAttribute('href', expect.stringContaining('openstreetmap.org/node/2'));
+  expect(screen.getByText('$90–180 / night')).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: /check rates/i })).toHaveAttribute('href', expect.stringContaining('google.com/maps/search'));
+  expect(screen.getByRole('link', { name: /garden museum/i })).toHaveAttribute('href', expect.stringContaining('openstreetmap.org/node/3'));
+  expect(screen.getByText('$12')).toBeInTheDocument();
   fetchSpy.mockRestore();
 });

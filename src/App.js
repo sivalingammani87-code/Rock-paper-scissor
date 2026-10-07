@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
 
 const copy = {
@@ -29,6 +29,26 @@ const copy = {
     locationMapLabel: (place) => `Map showing ${place}`,
     openMap: 'Open map',
     mapAttribution: 'Map data © OpenStreetMap contributors',
+    nearbyTitle: 'Around your destination',
+    nearbySubtitle: 'Nearby listings and a simple budget guide to help plan ahead.',
+    nearbyLoading: 'Finding nearby hotels and places to visit…',
+    nearbyError: 'Nearby places could not be loaded right now. Please try again later.',
+    nearbyEmpty: 'No nearby listings were found in OpenStreetMap.',
+    hotelsTitle: 'Nearby stays',
+    attractionsTitle: 'Places to visit',
+    noHotels: 'No nearby hotels were listed on the map.',
+    noAttractions: 'No nearby attractions were listed on the map.',
+    hotelBudgetLabel: 'Rough hotel budget guide (USD per night)',
+    hotelBudgetRanges: ['$40–90', '$90–180', '$180+'],
+    hotelBudgetDisclaimer: 'General planning estimates, not prices for these specific hotels. Check current rates before booking.',
+    night: 'night',
+    entranceFee: 'Entry',
+    freeAdmission: 'Free',
+    paidAdmission: 'Paid; check with venue',
+    feeNotListed: 'Fee not listed',
+    checkRates: 'Check rates',
+    kilometers: 'km away',
+    nearbyAttribution: 'Nearby listings © OpenStreetMap contributors. Fees may be missing or out of date.',
     leaving: 'Leaving',
     returning: 'Coming back',
     crew: 'The crew',
@@ -90,6 +110,26 @@ const copy = {
     locationMapLabel: (place) => `Mapa de ${place}`,
     openMap: 'Abrir mapa',
     mapAttribution: 'Datos del mapa © colaboradores de OpenStreetMap',
+    nearbyTitle: 'Cerca de tu destino',
+    nearbySubtitle: 'Lugares cercanos y una guía de presupuesto para orientarte.',
+    nearbyLoading: 'Buscando hoteles y lugares cercanos…',
+    nearbyError: 'No se pudieron cargar los lugares cercanos. Vuelve a intentarlo más tarde.',
+    nearbyEmpty: 'No se encontraron lugares cercanos en OpenStreetMap.',
+    hotelsTitle: 'Alojamientos cercanos',
+    attractionsTitle: 'Lugares para visitar',
+    noHotels: 'No hay hoteles cercanos indicados en el mapa.',
+    noAttractions: 'No hay atracciones cercanas indicadas en el mapa.',
+    hotelBudgetLabel: 'Guía orientativa de hoteles (USD por noche)',
+    hotelBudgetRanges: ['$40–90', '$90–180', '$180+'],
+    hotelBudgetDisclaimer: 'Estimaciones generales, no precios de estos hoteles. Comprueba las tarifas actuales antes de reservar.',
+    night: 'noche',
+    entranceFee: 'Entrada',
+    freeAdmission: 'Gratis',
+    paidAdmission: 'De pago; consultar el lugar',
+    feeNotListed: 'Precio no indicado',
+    checkRates: 'Consultar precios',
+    kilometers: 'km de distancia',
+    nearbyAttribution: 'Lugares cercanos © colaboradores de OpenStreetMap. Los precios pueden faltar o estar desactualizados.',
     leaving: 'Salida',
     returning: 'Regreso',
     crew: 'Viajeros',
@@ -151,6 +191,26 @@ const copy = {
     locationMapLabel: (place) => `Carte de ${place}`,
     openMap: 'Ouvrir la carte',
     mapAttribution: 'Données cartographiques © contributeurs OpenStreetMap',
+    nearbyTitle: 'Autour de votre destination',
+    nearbySubtitle: 'Des lieux à proximité et un budget indicatif pour préparer votre séjour.',
+    nearbyLoading: 'Recherche d’hôtels et de lieux à visiter…',
+    nearbyError: 'Impossible de charger les lieux à proximité. Réessayez plus tard.',
+    nearbyEmpty: 'Aucun lieu à proximité trouvé sur OpenStreetMap.',
+    hotelsTitle: 'Hébergements à proximité',
+    attractionsTitle: 'Lieux à visiter',
+    noHotels: 'Aucun hôtel à proximité indiqué sur la carte.',
+    noAttractions: 'Aucun site à proximité indiqué sur la carte.',
+    hotelBudgetLabel: 'Budget hôtel indicatif (USD par nuit)',
+    hotelBudgetRanges: ['$40–90', '$90–180', '$180+'],
+    hotelBudgetDisclaimer: 'Estimations générales, pas les tarifs de ces hôtels. Vérifiez les prix actuels avant de réserver.',
+    night: 'nuit',
+    entranceFee: 'Entrée',
+    freeAdmission: 'Gratuit',
+    paidAdmission: 'Payant ; se renseigner sur place',
+    feeNotListed: 'Tarif non indiqué',
+    checkRates: 'Voir les tarifs',
+    kilometers: 'km',
+    nearbyAttribution: 'Lieux à proximité © contributeurs OpenStreetMap. Les tarifs peuvent être absents ou obsolètes.',
     leaving: 'Départ',
     returning: 'Retour',
     crew: 'Voyageurs',
@@ -212,6 +272,26 @@ const copy = {
     locationMapLabel: (place) => `${place} का नक्शा`,
     openMap: 'नक्शा खोलें',
     mapAttribution: 'नक्शे का डेटा © OpenStreetMap योगदानकर्ता',
+    nearbyTitle: 'आपकी जगह के आसपास',
+    nearbySubtitle: 'पास की जगहें और यात्रा का बजट बनाने के लिए एक आसान मार्गदर्शिका।',
+    nearbyLoading: 'आस-पास के होटल और घूमने की जगहें खोज रहे हैं…',
+    nearbyError: 'आस-पास की जगहें अभी लोड नहीं हो सकीं। कृपया बाद में फिर कोशिश करें।',
+    nearbyEmpty: 'OpenStreetMap पर आस-पास की जगहें नहीं मिलीं।',
+    hotelsTitle: 'आस-पास के होटल',
+    attractionsTitle: 'घूमने की जगहें',
+    noHotels: 'नक्शे पर आस-पास के होटल सूचीबद्ध नहीं हैं।',
+    noAttractions: 'नक्शे पर आस-पास घूमने की जगहें सूचीबद्ध नहीं हैं।',
+    hotelBudgetLabel: 'होटल का अनुमानित बजट (USD प्रति रात)',
+    hotelBudgetRanges: ['$40–90', '$90–180', '$180+'],
+    hotelBudgetDisclaimer: 'सामान्य योजना-अनुमान, इन होटलों की असली कीमत नहीं। बुकिंग से पहले मौजूदा दरें जाँचें।',
+    night: 'रात',
+    entranceFee: 'प्रवेश',
+    freeAdmission: 'मुफ़्त',
+    paidAdmission: 'शुल्क लागू; स्थल से पूछें',
+    feeNotListed: 'शुल्क सूचीबद्ध नहीं',
+    checkRates: 'दरें देखें',
+    kilometers: 'किमी दूर',
+    nearbyAttribution: 'आस-पास की जगहें © OpenStreetMap योगदानकर्ता। शुल्क की जानकारी अधूरी या पुरानी हो सकती है।',
     leaving: 'रवाना',
     returning: 'वापसी',
     crew: 'यात्री',
@@ -279,6 +359,30 @@ function createMapUrl(location) {
   return `https://www.openstreetmap.org/export/embed.html?${params.toString()}`;
 }
 
+function getDistanceKm(fromLatitude, fromLongitude, toLatitude, toLongitude) {
+  const radians = (degrees) => degrees * (Math.PI / 180);
+  const latitudeDelta = radians(toLatitude - fromLatitude);
+  const longitudeDelta = radians(toLongitude - fromLongitude);
+  const arc = Math.sin(latitudeDelta / 2) ** 2
+    + Math.cos(radians(fromLatitude)) * Math.cos(radians(toLatitude))
+    * Math.sin(longitudeDelta / 2) ** 2;
+  return 6371 * 2 * Math.atan2(Math.sqrt(arc), Math.sqrt(1 - arc));
+}
+
+function getPlaceCoordinates(place) {
+  const coordinates = place.center || place;
+  const latitude = Number(coordinates.lat);
+  const longitude = Number(coordinates.lon);
+  return Number.isFinite(latitude) && Number.isFinite(longitude) ? { latitude, longitude } : null;
+}
+
+function getEntranceFee(tags, text) {
+  if (tags.charge) return tags.charge;
+  if (tags.fee === 'no') return text.freeAdmission;
+  if (tags.fee === 'yes') return text.paidAdmission;
+  return text.feeNotListed;
+}
+
 function createItinerary(destination, startDate, endDate, experience, language) {
   const nights = Math.max(
     1,
@@ -312,6 +416,9 @@ function App() {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [locationLoading, setLocationLoading] = useState(false);
   const [locationError, setLocationError] = useState('');
+  const [nearbyPlaces, setNearbyPlaces] = useState(null);
+  const [nearbyLoading, setNearbyLoading] = useState(false);
+  const [nearbyError, setNearbyError] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [travelers, setTravelers] = useState(1);
@@ -321,6 +428,101 @@ function App() {
   const lastLocationSearch = useRef(0);
   const text = copy[language];
   const today = new Date().toISOString().slice(0, 10);
+
+  useEffect(() => {
+    if (!selectedLocation) {
+      setNearbyPlaces(null);
+      setNearbyLoading(false);
+      setNearbyError('');
+      return undefined;
+    }
+
+    const coordinates = getPlaceCoordinates(selectedLocation);
+    if (!coordinates) {
+      setNearbyPlaces(null);
+      setNearbyError(true);
+      console.error('The selected OpenStreetMap location did not include valid coordinates.');
+      return undefined;
+    }
+
+    const controller = new AbortController();
+    setNearbyLoading(true);
+    setNearbyError('');
+    setNearbyPlaces(null);
+
+    async function loadNearbyPlaces() {
+      const { latitude, longitude } = coordinates;
+      const query = [
+        '[out:json][timeout:25];',
+        '(',
+        `nwr(around:5000,${latitude},${longitude})["tourism"~"^(hotel|hostel|guest_house|motel)$"];`,
+        `nwr(around:5000,${latitude},${longitude})["tourism"~"^(attraction|museum|viewpoint)$"];`,
+        `nwr(around:5000,${latitude},${longitude})["historic"~"^(monument|castle|archaeological_site)$"];`,
+        `nwr(around:5000,${latitude},${longitude})["leisure"="park"];`,
+        ');out center tags;',
+      ].join('');
+
+      try {
+        const response = await fetch('https://overpass-api.de/api/interpreter', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          },
+          body: new URLSearchParams({ data: query }).toString(),
+          signal: controller.signal,
+        });
+        if (!response.ok) {
+          throw new Error(`Nearby place lookup failed with status ${response.status}`);
+        }
+
+        const result = await response.json();
+        if (!Array.isArray(result.elements)) {
+          throw new Error('Nearby place lookup returned an unexpected response');
+        }
+
+        const hotels = [];
+        const attractions = [];
+        result.elements.forEach((place) => {
+          const tags = place.tags || {};
+          const name = tags.name || tags['name:en'];
+          const placeCoordinates = getPlaceCoordinates(place);
+          if (!name || !placeCoordinates) return;
+
+          const item = {
+            id: `${place.type}/${place.id}`,
+            name,
+            distance: getDistanceKm(latitude, longitude, placeCoordinates.latitude, placeCoordinates.longitude),
+            tags,
+          };
+
+          if (['hotel', 'hostel', 'guest_house', 'motel'].includes(tags.tourism)) {
+            hotels.push(item);
+          } else {
+            attractions.push(item);
+          }
+        });
+
+        const nearestFirst = (first, second) => first.distance - second.distance;
+        if (!controller.signal.aborted) {
+          setNearbyPlaces({
+            hotels: hotels.sort(nearestFirst).slice(0, 6),
+            attractions: attractions.sort(nearestFirst).slice(0, 6),
+          });
+        }
+      } catch (error) {
+        if (!controller.signal.aborted) {
+          console.error('Unable to load nearby OpenStreetMap places:', error);
+          setNearbyError(true);
+        }
+      } finally {
+        if (!controller.signal.aborted) setNearbyLoading(false);
+      }
+    }
+
+    loadNearbyPlaces();
+    return () => controller.abort();
+  }, [selectedLocation]);
 
   async function handleLocationSearch() {
     const query = destination.trim();
@@ -483,20 +685,73 @@ function App() {
                 </div>
               )}
               {selectedLocation && (
-                <div className="location-map">
-                  <iframe
-                    title={text.locationMapLabel(selectedLocation.display_name)}
-                    src={createMapUrl(selectedLocation)}
-                    loading="lazy"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="map-caption">
-                    <span>{text.mapAttribution}</span>
-                    <a href={`https://www.openstreetmap.org/?mlat=${encodeURIComponent(selectedLocation.lat)}&mlon=${encodeURIComponent(selectedLocation.lon)}#map=13/${encodeURIComponent(selectedLocation.lat)}/${encodeURIComponent(selectedLocation.lon)}`} target="_blank" rel="noreferrer">
-                      {text.openMap} ↗
-                    </a>
+                <>
+                  <div className="location-map">
+                    <iframe
+                      title={text.locationMapLabel(selectedLocation.display_name)}
+                      src={createMapUrl(selectedLocation)}
+                      loading="lazy"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="map-caption">
+                      <span>{text.mapAttribution}</span>
+                      <a href={`https://www.openstreetmap.org/?mlat=${encodeURIComponent(selectedLocation.lat)}&mlon=${encodeURIComponent(selectedLocation.lon)}#map=13/${encodeURIComponent(selectedLocation.lat)}/${encodeURIComponent(selectedLocation.lon)}`} target="_blank" rel="noreferrer">
+                        {text.openMap} ↗
+                      </a>
+                    </div>
                   </div>
-                </div>
+                  <section className="nearby-section" aria-live="polite">
+                    <div className="nearby-heading">
+                      <div>
+                        <h3>{text.nearbyTitle}</h3>
+                        <p>{text.nearbySubtitle}</p>
+                      </div>
+                      <span className="budget-guide">
+                        <span>{text.hotelBudgetLabel}</span>
+                        <strong>{text.hotelBudgetRanges[budget]} / {text.night}</strong>
+                      </span>
+                    </div>
+                    <p className="budget-disclaimer">{text.hotelBudgetDisclaimer}</p>
+                    {nearbyLoading && <p className="nearby-status" role="status">{text.nearbyLoading}</p>}
+                    {nearbyError && <p className="nearby-error" role="alert">{text.nearbyError}</p>}
+                    {nearbyPlaces && (
+                      <>
+                        {nearbyPlaces.hotels.length === 0 && nearbyPlaces.attractions.length === 0 && <p className="nearby-status">{text.nearbyEmpty}</p>}
+                        <div className="nearby-grid">
+                          <div className="nearby-list">
+                            <h4>{text.hotelsTitle}</h4>
+                            {nearbyPlaces.hotels.length === 0
+                              ? <p className="nearby-status">{text.noHotels}</p>
+                              : nearbyPlaces.hotels.map((hotel) => (
+                                <article className="nearby-card" key={hotel.id}>
+                                  <div>
+                                    <a className="nearby-place-name" href={`https://www.openstreetmap.org/${hotel.id}`} target="_blank" rel="noreferrer">{hotel.name} ↗</a>
+                                    <span className="nearby-distance">{new Intl.NumberFormat(text.dateLocale, { maximumFractionDigits: 1 }).format(hotel.distance)} {text.kilometers}</span>
+                                  </div>
+                                  <a className="nearby-action" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${hotel.name} hotel rates ${selectedLocation.display_name}`)}`} target="_blank" rel="noreferrer">{text.checkRates}</a>
+                                </article>
+                              ))}
+                          </div>
+                          <div className="nearby-list">
+                            <h4>{text.attractionsTitle}</h4>
+                            {nearbyPlaces.attractions.length === 0
+                              ? <p className="nearby-status">{text.noAttractions}</p>
+                              : nearbyPlaces.attractions.map((place) => (
+                                <article className="nearby-card" key={place.id}>
+                                  <div>
+                                    <a className="nearby-place-name" href={`https://www.openstreetmap.org/${place.id}`} target="_blank" rel="noreferrer">{place.name} ↗</a>
+                                    <span className="nearby-distance">{new Intl.NumberFormat(text.dateLocale, { maximumFractionDigits: 1 }).format(place.distance)} {text.kilometers}</span>
+                                  </div>
+                                  <span className="nearby-fee"><span>{text.entranceFee}</span>{getEntranceFee(place.tags, text)}</span>
+                                </article>
+                              ))}
+                          </div>
+                        </div>
+                        <p className="nearby-attribution">{text.nearbyAttribution}</p>
+                      </>
+                    )}
+                  </section>
+                </>
               )}
             </div>
             <div className="form-row">
