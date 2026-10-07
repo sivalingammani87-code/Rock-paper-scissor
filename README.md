@@ -28,10 +28,11 @@ Include the `src` and `public` folders, `package.json`, `package-lock.json`, `.g
 
 ## Publish on GitHub Pages
 
-The included GitHub Actions workflow builds and deploys the site when changes are pushed to the `main` branch. To enable the first deployment:
+The included GitHub Actions workflow builds the site and publishes the generated website files to a dedicated `gh-pages` branch whenever changes are pushed to `main`. To enable public hosting:
 
-1. Upload or push the project files, including `.github/workflows/deploy.yml`, to the `main` branch of `sivalingammani87-code/Rock-paper-scissor`.
-2. In the repository, open **Settings → Pages** and set the build and deployment source to **GitHub Actions**.
-3. Open the **Actions** tab and wait for the **Deploy to GitHub Pages** workflow to finish.
+1. Push the project files, including `.github/workflows/deploy.yml`, to the `main` branch of `sivalingammani87-code/Rock-paper-scissor`.
+2. In the repository, open **Settings → Pages** and wait until the workflow creates the `gh-pages` branch.
+3. Under **Build and deployment**, choose **Deploy from a branch**, select **`gh-pages`** and **`/(root)`**, then save.
+4. Wait for GitHub Pages to publish the site. Future pushes to `main` automatically update the `gh-pages` branch.
 
-The public website will be available at [https://sivalingammani87-code.github.io/Rock-paper-scissor/](https://sivalingammani87-code.github.io/Rock-paper-scissor/). It becomes available after GitHub completes its first deployment. Future pushes to `main` deploy automatically.
+The public website will be available at [https://sivalingammani87-code.github.io/Rock-paper-scissor/](https://sivalingammani87-code.github.io/Rock-paper-scissor/).
